@@ -1,0 +1,65 @@
+<head>
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="container ">
+    <div class="heading">
+      <div class="logotype">
+        <div class="logo">Logo<div class="type">Type</div></div>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li><a [routerLink]="['/fields']" >Fields</a></li>
+          <li><a [routerLink]="['/responses']" >Responses</a></li>
+          <li><a [routerLink]="['/profile']"><strong>{{currentUser.firstName}} {{currentUser.lastName}}</strong> ▼</a>
+            <ul class="submenu">
+              <li><a [routerLink]="['/edit-profile']" >Edit profile</a></li>
+              <li><a [routerLink]="['/change-pass']" >Change password</a></li>
+              <li><a [routerLink]="['/login']">LogOut</a></li>
+            </ul>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="clickedSrv">
+  <div class="center-block">
+    <div class="enter-form">
+      <div style="padding: 20px;     width: -webkit-fill-available;">
+        <div style="float: left" class="labels"></div>
+
+        <div *ngIf="answers">
+
+
+          <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index" matColumnDef="{{disCol}}">
+              <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+              <mat-cell *matCellDef="let element "> {{element[disCol]}}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="   width:250px; max-width:250px; display: inline-block;">
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>
+  </div>
+
+</div>
+
+</body>
+
+
+
